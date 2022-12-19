@@ -51,24 +51,45 @@ Note, to use the `load` method on Blocks, you must already have a block document
 ```python
 from prefect import flow
 from prefect_google_sheets.tasks import (
-    goodbye_prefect_google_sheets,
-    hello_prefect_google_sheets,
+    read_google_sheet_as_data_frame,
+    read_google_sheet_as_list_of_lists,
+    read_google_sheet_as_dict_of_lists,
 )
 
-# Use `with_options` to customize options on any existing task or flow:
-
-custom_goodbye_prefect_google_sheets = goodbye_prefect_google_sheets.with_options(
-    name="My custom task name",
-    retries=2,
-    retry_delay_seconds=10,
-)
 
 @flow
-def example_flow():
-    hello_prefect_google_sheets
-    custom_goodbye_prefect_google_sheets
+def read_sheets():
+    sheet_df = read_google_sheet_as_data_frame(
+        is_public_sheet="<True or False, depending if the sheet you are reading is public or not>",
+        google_service_account="<The Google Service Account information in order to access the sheet>",
+        google_sheet_key="<The key of the sheet to read>",
+        google_sheet_name="<The name of the sheet to read>",
+        first_row_header="<True or False, depending if the first row of the table needs to be considered as the header>",
+        on_bad_lines="<What to do if bad lines are discovered while reading the sheet>",
+        clean="<True or False, depending if blank columns and rows need to be removed>"
+    )
 
-example_flow()
+    sheet_list_of_lists = read_google_sheet_as_list_of_lists(
+        is_public_sheet="<True or False, depending if the sheet you are reading is public or not>",
+        google_service_account="<The Google Service Account information in order to access the sheet>",
+        google_sheet_key="<The key of the sheet to read>",
+        google_sheet_name="<The name of the sheet to read>",
+        first_row_header="<True or False, depending if the first row of the table needs to be considered as the header>",
+        on_bad_lines="<What to do if bad lines are discovered while reading the sheet>",
+        clean="<True or False, depending if blank columns and rows need to be removed>"
+    )
+
+    sheet_dict_of_lists = read_google_sheet_as_dict_of_lists(
+        is_public_sheet="<True or False, depending if the sheet you are reading is public or not>",
+        google_service_account="<The Google Service Account information in order to access the sheet>",
+        google_sheet_key="<The key of the sheet to read>",
+        google_sheet_name="<The name of the sheet to read>",
+        first_row_header="<True or False, depending if the first row of the table needs to be considered as the header>",
+        on_bad_lines="<What to do if bad lines are discovered while reading the sheet>",
+        clean="<True or False, depending if blank columns and rows need to be removed>"
+    )
+
+read_sheet_as_dataframe()
 ```
 
 For more tips on how to use tasks and flows in a Collection, check out [Using Collections](https://orion-docs.prefect.io/collections/usage/)!
