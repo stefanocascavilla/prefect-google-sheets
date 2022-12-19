@@ -1,0 +1,20 @@
+{
+  "template": "https://github.com/PrefectHQ/prefect-collection-template",
+  "commit": "64d068ac5b986298a6d74d27c2b93d5d4b199243",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "full_name": "Stefano Cascavilla",
+      "email": "cascavilla1@gmail.com",
+      "github_organization": "stefanocascavilla",
+      "collection_name": "prefect-google-sheets",
+      "collection_slug": "prefect_google_sheets",
+      "collection_short_description": "Prefect collection of tasks in order to work with Google Sheets",
+      "_copy_without_render": [
+        ".github/workflows/*.yml"
+      ],
+      "_template": "https://github.com/PrefectHQ/prefect-collection-template"
+    }
+  },
+  "directory": null
+}
