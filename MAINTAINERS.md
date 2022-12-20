@@ -75,7 +75,7 @@ To add a new page for a module in your collection, create a new markdown file in
 ::: prefect_google_sheets.{module_name}
 ```
 
-You can also refer to the `flows.md` and `tasks.md` files included in your generated project as examples.
+You can also refer to the `tasks.md` files included in your generated project as examples.
 
 Once you have working code, replace the default "Write and run a flow" example in `README.md` to match your collection.
 

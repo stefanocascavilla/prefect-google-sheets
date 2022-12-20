@@ -49,5 +49,3 @@ watch:
 nav:
     - Home: index.md
     - Tasks: tasks.md
-    - Flows: flows.md
-
