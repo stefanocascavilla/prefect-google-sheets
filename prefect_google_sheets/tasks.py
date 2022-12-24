@@ -4,13 +4,12 @@ prefect-google-sheets tasks
 
 from typing import Dict, List, Optional, Union
 
-import gspread
 from pandas import DataFrame
 from prefect import task
 
 from prefect_google_sheets.exceptions import GoogleSheetsConfigurationException
 from prefect_google_sheets.utils.dataframe import get_sheet_dataframe
-from prefect_google_sheets.utils.google import generate_google_credentials
+from prefect_google_sheets.utils.google import get_google_sheet_reference
 
 
 @task
@@ -70,17 +69,12 @@ def read_google_sheet_as_data_frame(
         exc_message = "Missing the Google Sheet name identifier."
         raise GoogleSheetsConfigurationException(exc_message)
 
-    if is_public_sheet:
-        sheet = f"""https://docs.google.com/spreadsheets/d/{google_sheet_key}/
-            export?format=csv&sheet={google_sheet_name}"""
-    else:
-        google_credentials = generate_google_credentials(
-            google_service_account=google_service_account
-        )
-        gspread_client = gspread.authorize(google_credentials)
-        sheet = gspread_client.open_by_key(google_sheet_key).worksheet(
-            google_sheet_name
-        )
+    sheet = get_google_sheet_reference(
+        is_public_sheet=is_public_sheet,
+        google_service_account=google_service_account,
+        google_sheet_key=google_sheet_key,
+        google_sheet_name=google_sheet_name,
+    )
 
     sheet_df = get_sheet_dataframe(
         sheet,
@@ -147,17 +141,12 @@ def read_google_sheet_as_list_of_lists(
         exc_message = "Missing the Google Sheet name identifier."
         raise GoogleSheetsConfigurationException(exc_message)
 
-    if is_public_sheet:
-        sheet = f"""https://docs.google.com/spreadsheets/d/{google_sheet_key}/
-            export?format=csv&sheet={google_sheet_name}"""
-    else:
-        google_credentials = generate_google_credentials(
-            google_service_account=google_service_account
-        )
-        gspread_client = gspread.authorize(google_credentials)
-        sheet = gspread_client.open_by_key(google_sheet_key).worksheet(
-            google_sheet_name
-        )
+    sheet = get_google_sheet_reference(
+        is_public_sheet=is_public_sheet,
+        google_service_account=google_service_account,
+        google_sheet_key=google_sheet_key,
+        google_sheet_name=google_sheet_name,
+    )
 
     sheet_df = get_sheet_dataframe(
         sheet,
@@ -224,17 +213,12 @@ def read_google_sheet_as_dict_of_lists(
         exc_message = "Missing the Google Sheet name identifier."
         raise GoogleSheetsConfigurationException(exc_message)
 
-    if is_public_sheet:
-        sheet = f"""https://docs.google.com/spreadsheets/d/{google_sheet_key}/
-            export?format=csv&sheet={google_sheet_name}"""
-    else:
-        google_credentials = generate_google_credentials(
-            google_service_account=google_service_account
-        )
-        gspread_client = gspread.authorize(google_credentials)
-        sheet = gspread_client.open_by_key(google_sheet_key).worksheet(
-            google_sheet_name
-        )
+    sheet = get_google_sheet_reference(
+        is_public_sheet=is_public_sheet,
+        google_service_account=google_service_account,
+        google_sheet_key=google_sheet_key,
+        google_sheet_name=google_sheet_name,
+    )
 
     sheet_df = get_sheet_dataframe(
         sheet,
@@ -297,3 +281,5 @@ def overwrite_google_sheet_with_df(
     if not google_sheet_name:
         exc_message = "Missing the Google Sheet name identifier."
         raise GoogleSheetsConfigurationException(exc_message)
+
+    # TO BE CONTINUED...
