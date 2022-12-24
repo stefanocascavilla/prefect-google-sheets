@@ -22,17 +22,17 @@ def get_sheet_dataframe(
     Read the content of a Google Sheet.
 
     Args:
-        - google_sheet: The google sheet reference
-        - header: The row representing the header of the sheet
-        - parse_dates: Whether to parse dates as date obj or not
-        - ob_bad_lines: What to do if bad rows are detected
-        - clean: Whether to remove blank columns/rows if any
+        google_sheet: The google sheet reference
+        header: The row representing the header of the sheet
+        parse_dates: Whether to parse dates as date obj or not
+        ob_bad_lines: What to do if bad rows are detected
+        clean: Whether to remove blank columns/rows if any
 
     Raises:
         - GoogleSheetValueError: If an exception is thrown
             while reading the Google Sheet
 
-    Return: The Google Sheet content as a pandas DataFrame
+    Returns: The Google Sheet content as a pandas DataFrame
     """
     try:
         if isinstance(google_sheet, Worksheet):
