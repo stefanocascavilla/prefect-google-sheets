@@ -14,3 +14,4 @@ mkdocs-gen-files
 interrogate
 coverage
 pillow
+importlib-metadata<5.0
