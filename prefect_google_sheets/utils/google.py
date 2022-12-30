@@ -18,7 +18,7 @@ GOOGLE_CREDENTIALS_SCOPES = [
 
 
 def generate_google_credentials(
-    google_service_account: Union[Dict, str]
+    google_service_account: Union[Dict, str] = None
 ) -> service_account.Credentials:
     """
     Generate the Google credentials based on Service Account information
@@ -56,11 +56,11 @@ def generate_google_credentials(
 
 
 def get_google_sheet_reference(
-    is_public_sheet: bool,
-    google_service_account: Union[Dict, str],
-    google_sheet_key: str,
-    google_sheet_name: str,
-) -> Union[str, gspread.Spreadsheet]:
+    is_public_sheet: bool = False,
+    google_service_account: Union[Dict, str] = None,
+    google_sheet_key: str = None,
+    google_sheet_name: str = None,
+) -> Union[str, gspread.Worksheet]:
     """
     Generate the Google Sheet reference.
 
@@ -80,7 +80,7 @@ def get_google_sheet_reference(
         - GoogleSheetServiceAccountError: If the service account
             information are broken or wrong
 
-    Returns: The Google credentials
+    Returns: The Google sheet reference
     """
 
     if is_public_sheet:
@@ -96,3 +96,19 @@ def get_google_sheet_reference(
         )
 
     return sheet
+
+
+def clear_google_worksheet(google_worksheet: gspread.Worksheet = None) -> None:
+    """
+    Clear the whole content of the Google Sheet
+
+    Args:
+        google_worksheet: The reference of the Google Sheet to clear
+
+    Raises:
+        - GoogleSheetClearException: If the clear operation
+            ends in an exception.
+
+    Returns: None
+    """
+    google_worksheet.clear()
