@@ -148,8 +148,7 @@ def read_google_sheet_as_list_of_lists(
         raise GoogleSheetsConfigurationException(exc_message)
 
     if is_public_sheet:
-        sheet = f"""https://docs.google.com/spreadsheets/d/{google_sheet_key}/
-            export?format=csv&sheet={google_sheet_name}"""
+        sheet = f"""https://docs.google.com/spreadsheets/d/{google_sheet_key}/export?format=csv&sheet={google_sheet_name}"""
     else:
         google_credentials = generate_google_credentials(
             google_service_account=google_service_account
